@@ -63,7 +63,6 @@ public class AuthController {
 
             final String jwt = jwtUtil.generateToken(userDetails);
 
-            // Extract roles from UserDetails
             String roles = userDetails.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.joining(","));

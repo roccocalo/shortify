@@ -17,11 +17,10 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    // This should be configured in application.properties
     @Value("${jwt.secret:defaultsecretkeythatshouldbeatleast32characters}")
     private String secret;
 
-    @Value("${jwt.expiration:86400000}") // 24 hours in milliseconds
+    @Value("${jwt.expiration:86400000}")
     private Long expiration;
 
     // Generate token for user
@@ -34,7 +33,6 @@ public class JwtUtil {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
 
-        // Use Keys.hmacShaKeyFor to create a secure key from the secret
         Key key = Keys.hmacShaKeyFor(secret.getBytes());
 
         return Jwts.builder()
@@ -46,18 +44,15 @@ public class JwtUtil {
                 .compact();
     }
 
-    // Validate token
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    // Extract username from token
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    // Extract expiration date from token
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
