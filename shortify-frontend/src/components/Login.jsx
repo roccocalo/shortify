@@ -21,18 +21,16 @@ function Login({ onLogin }) {
         body: JSON.stringify({ username, password }),
       });
 
-      const data = await response.json();
-
       if (response.ok) {
+        const data = await response.json();
         onLogin({
           token: data.token,
           username: data.username,
         });
       } else {
-        setMessage(data);
+        const errorText = await response.text()
+        setMessage(errorText);
       }
-    } catch (error) {
-      setMessage(`Error: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
