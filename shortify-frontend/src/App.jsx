@@ -1,35 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
+import Register from './components/Register';
+import Login from './components/Login';
+import UrlShortener from './components/UrlShortener';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState('');
+  const [username, setUsername] = useState('');
+  const [currentView, setCurrentView] = useState('login'); // login, register, or shortener
+
+  const handleLogin = (userData) => {
+    setIsLoggedIn(true);
+    setToken(userData.token);
+    setUsername(userData.username);
+    setCurrentView('shortener');
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setToken('');
+    setUsername('');
+    setCurrentView('login');
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <header className="App-header">
+        <h1>URL Shortener</h1>
+        {isLoggedIn && (
+          <div className="user-info">
+            <span>Logged in as: {username}</span>
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
+          </div>
+        )}
+      </header>
+      <main>
+        {!isLoggedIn && currentView === 'login' && (
+          <div>
+            <Login onLogin={handleLogin} />
+            <p>
+              Don't have an account?{' '}
+              <button onClick={() => setCurrentView('register')}>Register</button>
+            </p>
+          </div>
+        )}
+        
+        {!isLoggedIn && currentView === 'register' && (
+          <div>
+            <Register onRegisterSuccess={() => setCurrentView('login')} />
+            <p>
+              Already have an account?{' '}
+              <button onClick={() => setCurrentView('login')}>Login</button>
+            </p>
+          </div>
+        )}
+        
+        {isLoggedIn && currentView === 'shortener' && (
+          <UrlShortener token={token} />
+        )}
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
