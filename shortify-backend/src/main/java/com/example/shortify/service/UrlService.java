@@ -68,10 +68,8 @@ public class UrlService {
                 return Optional.empty();
             }
 
-            url.incrementClickCount();
             urlRepository.save(url);
 
-            System.out.println("URL trovato nel DB per shortCode: " + url.getOriginalUrl());
             return Optional.of(url.getOriginalUrl());
         }
         else {
@@ -113,8 +111,7 @@ public class UrlService {
                 shortUrl,
                 url.getShortCode(),
                 url.getCreatedAt(),
-                url.getExpiresAt(),
-                url.getClickCount()
+                url.getExpiresAt()
         );
     }
 }

@@ -8,19 +8,18 @@ public class UrlResponse {
     private String shortCode;
     private LocalDateTime createdAt;
     private LocalDateTime expiresAt;
-    private Integer clickCount;
+
 
     public UrlResponse() {
     }
 
     public UrlResponse(String originalUrl, String shortUrl, String shortCode,
-                       LocalDateTime createdAt, LocalDateTime expiresAt, Integer clickCount) {
+                       LocalDateTime createdAt, LocalDateTime expiresAt) {
         this.originalUrl = originalUrl;
         this.shortUrl = shortUrl;
         this.shortCode = shortCode;
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;
-        this.clickCount = clickCount;
     }
 
 
@@ -62,13 +61,5 @@ public class UrlResponse {
 
     public void setExpiresAt(LocalDateTime expiresAt) {
         this.expiresAt = expiresAt;
-    }
-
-    public Integer getClickCount() {
-        return clickCount;
-    }
-
-    public void setClickCount(Integer clickCount) {
-        this.clickCount = clickCount;
     }
 }

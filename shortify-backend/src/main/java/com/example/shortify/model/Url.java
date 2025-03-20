@@ -18,10 +18,9 @@ public class Url {
     private String shortCode;
     private LocalDateTime createdAt;
     private LocalDateTime expiresAt;
-    private Integer clickCount;
+
 
     public Url() {
-        this.clickCount = 0;
         this.createdAt = LocalDateTime.now();
     }
 
@@ -30,7 +29,6 @@ public class Url {
         this.shortCode = shortCode;
         this.createdAt = LocalDateTime.now();
         this.expiresAt = expiresAt;
-        this.clickCount = 0;
     }
 
     public Long getId() {
@@ -71,17 +69,5 @@ public class Url {
 
     public void setExpiresAt(LocalDateTime expiresAt) {
         this.expiresAt = expiresAt;
-    }
-
-    public Integer getClickCount() {
-        return clickCount;
-    }
-
-    public void setClickCount(Integer clickCount) {
-        this.clickCount = clickCount;
-    }
-
-    public void incrementClickCount() {
-        this.clickCount++;
     }
 }
