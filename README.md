@@ -4,9 +4,9 @@
 Shortify is a robust URL shortening service built with Spring Boot and React. This application transforms long, unwieldy URLs into concise, shareable links while providing detailed analytics on usage patterns. The modern React frontend delivers an intuitive user experience, while the secure Spring Boot backend implements JWT authentication and leverages MySQL for data persistence.
 
 ## Build With
-- SpringBoot, Spring Security with jwt implementation
+- SpringBoot, Spring Security with JWT implementation
 - React
-- Mysql
+- MySQL
   
 ## Features
 - Create shortened URLs with custom expiration dates
@@ -33,7 +33,7 @@ Shortify is a robust URL shortening service built with Spring Boot and React. Th
 1. Clone the repository
 2. Configure application properties in `application.properties`:
    ```
-   spring.datasource.url=jdbc:mysql://localhost:3306/shortify
+   spring.datasource.url=jdbc:mysql://localhost:3306/your_db
    spring.datasource.username=your_username
    spring.datasource.password=your_password
    spring.jpa.hibernate.ddl-auto=update
